@@ -1,0 +1,368 @@
+@import './abstract/reset';
+@import './abstract/variables';
+@import './abstract/animations';
+
+body {
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &--1 {
+        background: url('../image/bg1.png');
+        animation: animedOpacity .7s .4s infinite linear;
+    } 
+    
+    &--2 {
+        background: url('../image/bg2.png');
+        animation: animedOpacity .7s .8s infinite linear;
+    }
+    
+    &--3 {
+        background: url('../image/bg3.png');
+        animation: animedOpacity .7s 1.2s infinite linear;
+    }
+}
+
+
+.planets-container {
+    position: fixed;
+    width: min(19vw, 220px);
+    height: min(19vw, 220px);
+    transform: scaleX(5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__sun {
+        position: relative;
+        animation: sunPulse 5s infinite linear;
+        transform: scaleX(.2);
+        width: 8vw;
+        height: 8vw;
+        background-color: $lightTan;
+        box-shadow: 0 0 5px $lightTan;
+        filter: drop-shadow(0 0 10px $gamboge);
+        border-radius: 50%;
+    }
+
+    &__planet {
+        transform: scaleX(.2);
+        border-radius: 50%;
+
+        &__shadow {
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            z-index: 1000;
+            width: calc(100% + 2px);
+            height: calc(100% + 2px);
+            overflow: hidden;
+            border-radius: 50%;
+
+            &::after {
+                content: '';
+                position: absolute;
+                right: -35%;
+                width: 300%;
+                height: 100%;
+                background: linear-gradient(
+                    90deg, 
+                    transparent 0%, 
+                    #0f0f0f 33.3%, 
+                    #0f0f0f 66.6%,
+                    transparent 100%
+                );
+            }
+        }
+    }
+
+    &__route {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        
+        &--mercury {
+            animation: rotate 3s infinite linear;
+            @include planetAnimation(3s, 'mercury', 1);
+            width: 2.8vw;
+            height: 2.8vw;
+            
+            &__planet {
+                animation: fixStretch 3s infinite linear;
+                width: .6vw;
+                height: .6vw;
+                background-color: $warmGrey;
+
+                &__shadow::after {
+                    animation: planetShadow 3s infinite linear;
+                }
+            }
+        }
+
+        &--venus {
+            animation: rotate 5.6s  infinite linear;
+            @include planetAnimation(5.6s, 'venus', 2);
+            width: 4vw;
+            height: 4vw;
+            
+            &__planet {
+                background-color: $gamboge;
+                width: .9vw;
+                height: .9vw;
+                animation: fixStretch 5.6s infinite linear;
+
+                &__shadow::after {
+                    animation: planetShadow 5.6s infinite linear;
+                }
+            }
+        }
+
+        &--earth {
+            animation: rotate 7.8s infinite linear;
+            @include planetAnimation(7.8s, 'earth', 3);
+            width: 5.2vw;
+            height: 5.2vw;
+            
+            &__planet {
+                background-color: $bluish;
+                width: 1.1vw;
+                height: 1.1vw;
+                animation: fixStretch 7.8s infinite linear;
+
+                &__shadow::after {
+                    animation: planetShadow 7.8s infinite linear;
+                }
+
+                &::before {
+                    content: '';
+                    margin-left: .1vw;
+                    display: block;
+                    width: 35%;
+                    height: 45%;
+                    background-color: $ao;
+                    border-radius: 50%;
+                    transform: skew(150deg);
+                }
+
+                &::after {
+                    content: '';
+                    margin-left: .3vw;
+                    display: block;
+                    width: 55%;
+                    height: 35%;
+                    background-color: $ao;
+                    border-radius: 50%;
+                    transform: skew(-140deg);
+                }
+            }
+        }
+
+        &--mars {
+            animation: rotate 10.4s infinite linear;
+            @include planetAnimation(10.4s, 'mars', 4);
+            width: 6vw;
+            height: 6vw;
+            
+            &__planet {
+                width: .8vw;
+                height: .8vw;
+                animation: fixStretch 10.4s infinite linear;
+                background-color: $fieryOrange;
+
+                &__shadow::after {
+                    animation: planetShadow 10.4s infinite linear;
+                }
+            }
+        }
+
+        &--jupiter {
+            animation: rotate 14.5s infinite linear;
+            @include planetAnimation(14.5s, 'jupiter', 5);
+            width: 11vw;
+            height: 11vw;
+            
+            &__planet {
+                width: 3.8vw;
+                height: 3.8vw;
+                animation: fixStretch 14.5s infinite linear;
+                background: linear-gradient(
+                    $mushroom 0%, 
+                    $dust 10%, 
+                    $mushroom 15%, 
+                    $lightBrown 40%, 
+                    $mushroom 60%, 
+                    $lightBrown 68%, 
+                    $mushroom 75%, 
+                    $dust 90%, 
+                    $mushroom 100%
+                );
+
+                &__shadow::after {
+                    animation: planetShadow 14.5s infinite linear;
+                }
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    background-color: $dust;
+                    transform: skew(-15deg);
+                    inset: 0;
+                    border-radius: 50%; 
+                    width: 20%;
+                    height: 20%;
+                    left: 50%;
+                    top: 60%;              
+                }
+            }
+        }
+
+        &--saturn { 
+            animation: rotate 18.8s infinite linear;
+            @include planetAnimation(18.8s, 'saturn', 6);
+            width: 12.6vw;
+            height: 12.6vw;
+            
+            &__planet {
+                width: 2.2vw;
+                height: 2.2vw;
+                animation: fixStretch 18.8s infinite linear;
+                display: flex;
+                flex-direction: column;
+
+                &__shadow::after {
+                    animation: planetShadow 18.8s infinite linear;
+                }
+                
+                > span {
+                    
+                    &:nth-of-type(1) {
+                        position: absolute;
+                        top: -10%;
+                        left: -6%;
+                        display: block;
+                        width: 110%;
+                        height: 110%;
+                        border-radius: 50%;
+                        border: .4vw solid $gainsboro70;
+                        transform: skew(-55deg, 15deg);
+                    }
+                    
+                    &:nth-of-type(2), &:nth-of-type(3) {
+                        background-color: $warmGrey;
+                        display: block;
+                        flex: 1;
+                    }
+
+                    &:nth-of-type(2) {
+                        position: relative;
+                        z-index: 999;
+                        border-top-left-radius: 2.2vw;
+                        border-top-right-radius: 2.2vw;
+                    }
+
+                    &:nth-of-type(3) {
+                        border-bottom-left-radius: 2.2vw;
+                        border-bottom-right-radius: 2.2vw;
+                    }
+                }
+            }
+        }
+
+        &--uranus {
+            
+            animation: rotate 22.6s infinite linear;
+            @include planetAnimation(22.6s, 'uranus', 7);
+            width: 15.8vw;
+            height: 15.8vw;
+            
+            &__planet {
+                width: 2.4vw;
+                height: 2.4vw;
+                animation: fixStretch 22.6s infinite linear;
+                display: flex;
+                flex-direction: column;
+
+                &__shadow::after {
+                    animation: planetShadow 22.6s infinite linear;
+                }
+                
+                > span {
+                    
+                    &:nth-of-type(1) {
+                        position: absolute;
+                        top: -2%;
+                        left: -3%;
+                        display: block;
+                        width: 105%;
+                        height: 105%;
+                        border-radius: 50%;
+                        border: .1vw solid $gainsboro70;
+                        transform: skew(215deg);
+                    }
+                    
+                    &:nth-of-type(2), &:nth-of-type(3) {
+                        background-color: $paleAqua;
+                        display: block;
+                        flex: 1;
+                    }
+
+                    &:nth-of-type(2) {
+                        position: relative;
+                        z-index: 999;
+                        border-top-left-radius: 2.2vw;
+                        border-top-right-radius: 2.2vw;
+                    }
+
+                    &:nth-of-type(3) {
+                        border-bottom-left-radius: 2.2vw;
+                        border-bottom-right-radius: 2.2vw;
+                    }
+                }
+            }
+        }
+
+        &--neptune {
+            animation: rotate 27.2s infinite linear;
+            @include planetAnimation(27.2s, 'neptune', 8);
+            width: 18.4vw;
+            height: 18.4vw;
+
+            
+            &__planet {
+                width: 2.6vw;
+                height: 2.6vw;
+                animation: fixStretch 27.2s infinite linear;
+                background: linear-gradient(
+                    $paleAqua 0%, 
+                    $ultramarineBlue 20%, 
+                    $bluish  25%, 
+                    $ultramarineBlue 30%, 
+                    $ultramarineBlue 40%, 
+                    $paleAqua 45%, 
+                    $ultramarineBlue 50%, 
+                    $ultramarineBlue 60%, 
+                    $bluish 65%, 
+                    $ultramarineBlue 70%, 
+                    $ultramarineBlue 80%, 
+                    $bluish 85%, 
+                    $ultramarineBlue 95%,
+                    $paleAqua 100%, 
+                );
+
+                &__shadow::after {
+                    animation: planetShadow 27.2s infinite linear;
+                }
+            }
+        }
+    }
+}

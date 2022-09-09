@@ -1,0 +1,566 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+button {
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+@keyframes sunPulse {
+  0% {
+    box-shadow: 0 0 5px #fff09d;
+    filter: drop-shadow(0 0 10px #E39E1C);
+  }
+  33.% {
+    box-shadow: 0 0 20px #fff09d;
+    filter: drop-shadow(0 0 10px #E39E1C);
+  }
+  66.6% {
+    box-shadow: 0 0 10px #fff09d;
+    filter: drop-shadow(0 0 20px #E39E1C);
+  }
+  100% {
+    box-shadow: 0 0 5px #fff09d;
+    filter: drop-shadow(0 0 10px #E39E1C);
+  }
+}
+@keyframes fixStretch {
+  0% {
+    transform: rotateZ(-360deg) scaleX(0.2) scale(1);
+  }
+  25% {
+    transform: rotateZ(-270deg) scaleX(0.2) scale(1.4);
+  }
+  50% {
+    transform: rotateZ(-180deg) scaleX(0.2) scale(1);
+  }
+  75% {
+    transform: rotateZ(-90deg) scaleX(0.2) scale(0.7);
+  }
+  100% {
+    transform: rotateZ(0deg) scaleX(0.2) scale(1);
+  }
+}
+@keyframes animedOpacity {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes planetShadow {
+  0% {
+    right: -35%;
+    opacity: 1;
+  }
+  25% {
+    right: -100%;
+    opacity: 1;
+  }
+  50% {
+    right: -170%;
+    opacity: 1;
+  }
+  75% {
+    right: -240%;
+    opacity: 1;
+  }
+  75.1% {
+    right: -240%;
+    opacity: 0;
+  }
+  75.1% {
+    right: 55%;
+    opacity: 1;
+  }
+  85% {
+    right: 0%;
+    opacity: 1;
+  }
+  100% {
+    right: -35%;
+    opacity: 1;
+  }
+}
+body {
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.bg--1 {
+  background: url("../image/bg1.png");
+  animation: animedOpacity 0.7s 0.4s infinite linear;
+}
+.bg--2 {
+  background: url("../image/bg2.png");
+  animation: animedOpacity 0.7s 0.8s infinite linear;
+}
+.bg--3 {
+  background: url("../image/bg3.png");
+  animation: animedOpacity 0.7s 1.2s infinite linear;
+}
+
+.planets-container {
+  position: fixed;
+  width: min(19vw, 220px);
+  height: min(19vw, 220px);
+  transform: scaleX(5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.planets-container__sun {
+  position: relative;
+  animation: sunPulse 5s infinite linear;
+  transform: scaleX(0.2);
+  width: 8vw;
+  height: 8vw;
+  background-color: #fff09d;
+  box-shadow: 0 0 5px #fff09d;
+  filter: drop-shadow(0 0 10px #E39E1C);
+  border-radius: 50%;
+}
+.planets-container__planet {
+  transform: scaleX(0.2);
+  border-radius: 50%;
+}
+.planets-container__planet__shadow {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  z-index: 1000;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  overflow: hidden;
+  border-radius: 50%;
+}
+.planets-container__planet__shadow::after {
+  content: "";
+  position: absolute;
+  right: -35%;
+  width: 300%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, #0f0f0f 33.3%, #0f0f0f 66.6%, transparent 100%);
+}
+.planets-container__route {
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+.planets-container__route--mercury {
+  animation: rotate 3s infinite linear;
+  animation: mercuryAnimation 3s linear infinite;
+  width: 2.8vw;
+  height: 2.8vw;
+}
+@keyframes mercuryAnimation {
+  0% {
+    transform: rotateZ(0deg);
+    z-index: 1;
+  }
+  49.9% {
+    z-index: 1;
+  }
+  50% {
+    z-index: -1;
+  }
+  99.9% {
+    z-index: -1;
+  }
+  100% {
+    transform: rotateZ(-360deg);
+    z-index: 1;
+  }
+}
+.planets-container__route--mercury__planet {
+  animation: fixStretch 3s infinite linear;
+  width: 0.6vw;
+  height: 0.6vw;
+  background-color: #978D84;
+}
+.planets-container__route--mercury__planet__shadow::after {
+  animation: planetShadow 3s infinite linear;
+}
+.planets-container__route--venus {
+  animation: rotate 5.6s infinite linear;
+  animation: venusAnimation 5.6s linear infinite;
+  width: 4vw;
+  height: 4vw;
+}
+@keyframes venusAnimation {
+  0% {
+    transform: rotateZ(0deg);
+    z-index: 2;
+  }
+  49.9% {
+    z-index: 2;
+  }
+  50% {
+    z-index: -2;
+  }
+  99.9% {
+    z-index: -2;
+  }
+  100% {
+    transform: rotateZ(-360deg);
+    z-index: 2;
+  }
+}
+.planets-container__route--venus__planet {
+  background-color: #E39E1C;
+  width: 0.9vw;
+  height: 0.9vw;
+  animation: fixStretch 5.6s infinite linear;
+}
+.planets-container__route--venus__planet__shadow::after {
+  animation: planetShadow 5.6s infinite linear;
+}
+.planets-container__route--earth {
+  animation: rotate 7.8s infinite linear;
+  animation: earthAnimation 7.8s linear infinite;
+  width: 5.2vw;
+  height: 5.2vw;
+}
+@keyframes earthAnimation {
+  0% {
+    transform: rotateZ(0deg);
+    z-index: 3;
+  }
+  49.9% {
+    z-index: 3;
+  }
+  50% {
+    z-index: -3;
+  }
+  99.9% {
+    z-index: -3;
+  }
+  100% {
+    transform: rotateZ(-360deg);
+    z-index: 3;
+  }
+}
+.planets-container__route--earth__planet {
+  background-color: #287ab8;
+  width: 1.1vw;
+  height: 1.1vw;
+  animation: fixStretch 7.8s infinite linear;
+}
+.planets-container__route--earth__planet__shadow::after {
+  animation: planetShadow 7.8s infinite linear;
+}
+.planets-container__route--earth__planet::before {
+  content: "";
+  margin-left: 0.1vw;
+  display: block;
+  width: 35%;
+  height: 45%;
+  background-color: #078206;
+  border-radius: 50%;
+  transform: skew(150deg);
+}
+.planets-container__route--earth__planet::after {
+  content: "";
+  margin-left: 0.3vw;
+  display: block;
+  width: 55%;
+  height: 35%;
+  background-color: #078206;
+  border-radius: 50%;
+  transform: skew(-140deg);
+}
+.planets-container__route--mars {
+  animation: rotate 10.4s infinite linear;
+  animation: marsAnimation 10.4s linear infinite;
+  width: 6vw;
+  height: 6vw;
+}
+@keyframes marsAnimation {
+  0% {
+    transform: rotateZ(0deg);
+    z-index: 4;
+  }
+  49.9% {
+    z-index: 4;
+  }
+  50% {
+    z-index: -4;
+  }
+  99.9% {
+    z-index: -4;
+  }
+  100% {
+    transform: rotateZ(-360deg);
+    z-index: 4;
+  }
+}
+.planets-container__route--mars__planet {
+  width: 0.8vw;
+  height: 0.8vw;
+  animation: fixStretch 10.4s infinite linear;
+  background-color: #b3491f;
+}
+.planets-container__route--mars__planet__shadow::after {
+  animation: planetShadow 10.4s infinite linear;
+}
+.planets-container__route--jupiter {
+  animation: rotate 14.5s infinite linear;
+  animation: jupiterAnimation 14.5s linear infinite;
+  width: 11vw;
+  height: 11vw;
+}
+@keyframes jupiterAnimation {
+  0% {
+    transform: rotateZ(0deg);
+    z-index: 5;
+  }
+  49.9% {
+    z-index: 5;
+  }
+  50% {
+    z-index: -5;
+  }
+  99.9% {
+    z-index: -5;
+  }
+  100% {
+    transform: rotateZ(-360deg);
+    z-index: 5;
+  }
+}
+.planets-container__route--jupiter__planet {
+  width: 3.8vw;
+  height: 3.8vw;
+  animation: fixStretch 14.5s infinite linear;
+  background: linear-gradient(#bea788 0%, #b1987a 10%, #bea788 15%, #b26821 40%, #bea788 60%, #b26821 68%, #bea788 75%, #b1987a 90%, #bea788 100%);
+}
+.planets-container__route--jupiter__planet__shadow::after {
+  animation: planetShadow 14.5s infinite linear;
+}
+.planets-container__route--jupiter__planet::after {
+  content: "";
+  position: absolute;
+  background-color: #b1987a;
+  transform: skew(-15deg);
+  inset: 0;
+  border-radius: 50%;
+  width: 20%;
+  height: 20%;
+  left: 50%;
+  top: 60%;
+}
+.planets-container__route--saturn {
+  animation: rotate 18.8s infinite linear;
+  animation: saturnAnimation 18.8s linear infinite;
+  width: 12.6vw;
+  height: 12.6vw;
+}
+@keyframes saturnAnimation {
+  0% {
+    transform: rotateZ(0deg);
+    z-index: 6;
+  }
+  49.9% {
+    z-index: 6;
+  }
+  50% {
+    z-index: -6;
+  }
+  99.9% {
+    z-index: -6;
+  }
+  100% {
+    transform: rotateZ(-360deg);
+    z-index: 6;
+  }
+}
+.planets-container__route--saturn__planet {
+  width: 2.2vw;
+  height: 2.2vw;
+  animation: fixStretch 18.8s infinite linear;
+  display: flex;
+  flex-direction: column;
+}
+.planets-container__route--saturn__planet__shadow::after {
+  animation: planetShadow 18.8s infinite linear;
+}
+.planets-container__route--saturn__planet > span:nth-of-type(1) {
+  position: absolute;
+  top: -10%;
+  left: -6%;
+  display: block;
+  width: 110%;
+  height: 110%;
+  border-radius: 50%;
+  border: 0.4vw solid rgba(221, 221, 221, 0.4392156863);
+  transform: skew(-55deg, 15deg);
+}
+.planets-container__route--saturn__planet > span:nth-of-type(2), .planets-container__route--saturn__planet > span:nth-of-type(3) {
+  background-color: #978D84;
+  display: block;
+  flex: 1;
+}
+.planets-container__route--saturn__planet > span:nth-of-type(2) {
+  position: relative;
+  z-index: 999;
+  border-top-left-radius: 2.2vw;
+  border-top-right-radius: 2.2vw;
+}
+.planets-container__route--saturn__planet > span:nth-of-type(3) {
+  border-bottom-left-radius: 2.2vw;
+  border-bottom-right-radius: 2.2vw;
+}
+.planets-container__route--uranus {
+  animation: rotate 22.6s infinite linear;
+  animation: uranusAnimation 22.6s linear infinite;
+  width: 15.8vw;
+  height: 15.8vw;
+}
+@keyframes uranusAnimation {
+  0% {
+    transform: rotateZ(0deg);
+    z-index: 7;
+  }
+  49.9% {
+    z-index: 7;
+  }
+  50% {
+    z-index: -7;
+  }
+  99.9% {
+    z-index: -7;
+  }
+  100% {
+    transform: rotateZ(-360deg);
+    z-index: 7;
+  }
+}
+.planets-container__route--uranus__planet {
+  width: 2.4vw;
+  height: 2.4vw;
+  animation: fixStretch 22.6s infinite linear;
+  display: flex;
+  flex-direction: column;
+}
+.planets-container__route--uranus__planet__shadow::after {
+  animation: planetShadow 22.6s infinite linear;
+}
+.planets-container__route--uranus__planet > span:nth-of-type(1) {
+  position: absolute;
+  top: -2%;
+  left: -3%;
+  display: block;
+  width: 105%;
+  height: 105%;
+  border-radius: 50%;
+  border: 0.1vw solid rgba(221, 221, 221, 0.4392156863);
+  transform: skew(215deg);
+}
+.planets-container__route--uranus__planet > span:nth-of-type(2), .planets-container__route--uranus__planet > span:nth-of-type(3) {
+  background-color: #b3d8de;
+  display: block;
+  flex: 1;
+}
+.planets-container__route--uranus__planet > span:nth-of-type(2) {
+  position: relative;
+  z-index: 999;
+  border-top-left-radius: 2.2vw;
+  border-top-right-radius: 2.2vw;
+}
+.planets-container__route--uranus__planet > span:nth-of-type(3) {
+  border-bottom-left-radius: 2.2vw;
+  border-bottom-right-radius: 2.2vw;
+}
+.planets-container__route--neptune {
+  animation: rotate 27.2s infinite linear;
+  animation: neptuneAnimation 27.2s linear infinite;
+  width: 18.4vw;
+  height: 18.4vw;
+}
+@keyframes neptuneAnimation {
+  0% {
+    transform: rotateZ(0deg);
+    z-index: 8;
+  }
+  49.9% {
+    z-index: 8;
+  }
+  50% {
+    z-index: -8;
+  }
+  99.9% {
+    z-index: -8;
+  }
+  100% {
+    transform: rotateZ(-360deg);
+    z-index: 8;
+  }
+}
+.planets-container__route--neptune__planet {
+  width: 2.6vw;
+  height: 2.6vw;
+  animation: fixStretch 27.2s infinite linear;
+  background: linear-gradient(#b3d8de 0%, #3E6AE3 20%, #287ab8 25%, #3E6AE3 30%, #3E6AE3 40%, #b3d8de 45%, #3E6AE3 50%, #3E6AE3 60%, #287ab8 65%, #3E6AE3 70%, #3E6AE3 80%, #287ab8 85%, #3E6AE3 95%, #b3d8de 100%);
+}
+.planets-container__route--neptune__planet__shadow::after {
+  animation: planetShadow 27.2s infinite linear;
+}
+
+/*# sourceMappingURL=style.css.map */

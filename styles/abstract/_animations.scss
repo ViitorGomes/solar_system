@@ -1,0 +1,130 @@
+@keyframes sunPulse {
+    0% {
+        box-shadow: 0 0 5px $lightTan;
+        filter: drop-shadow(0 0 10px $gamboge);
+    }
+
+    33.% {
+        box-shadow: 0 0 20px $lightTan;
+        filter: drop-shadow(0 0 10px $gamboge);
+    }
+
+    66.6% {
+        box-shadow: 0 0 10px $lightTan;
+        filter: drop-shadow(0 0 20px $gamboge);
+    }
+
+    100% {
+        box-shadow: 0 0 5px $lightTan;
+        filter: drop-shadow(0 0 10px $gamboge);
+    }
+}
+
+@keyframes fixStretch {
+    0% {
+        transform: rotateZ(-360deg) scaleX(.2) scale(1);
+    }
+
+    25% {
+        transform: rotateZ(-270deg) scaleX(.2) scale(1.4);
+    }
+
+    50% {
+        transform: rotateZ(-180deg) scaleX(.2) scale(1);
+    }
+
+    75% {
+        transform: rotateZ(-90deg) scaleX(.2) scale(.7);
+    }
+    
+    100% {
+        transform: rotateZ(0deg) scaleX(.2) scale(1);
+    } 
+}
+
+@keyframes animedOpacity {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+@mixin planetAnimation($time, $name, $index) {
+    $animationName : $name + 'Animation';
+
+    animation: unquote($animationName) $time linear infinite;
+
+    @keyframes #{$animationName} {
+        0% {
+            transform: rotateZ(0deg);
+            z-index: $index;
+        }
+    
+        49.9% {
+            z-index: $index;
+        }
+    
+        50% {
+            z-index: -$index;
+        }
+    
+        99.9% {
+            z-index: -$index;
+        }
+    
+        100% {
+            transform: rotateZ(-360deg);
+            z-index: $index;
+        }
+    }
+}
+
+@keyframes planetShadow {
+    0% {
+        right: -35%;
+        opacity: 1;
+    }
+
+    25% {
+        right: -100%;
+        opacity: 1;
+    }
+
+    50% {
+        right: -170%;
+        opacity: 1;
+    }
+
+    75% {
+        right: -240%;
+        opacity: 1;
+    }
+    
+    75.1% {
+        right: -240%;
+        opacity: 0;
+    }
+
+    75.1% {
+        right: 55%;
+        opacity: 1;
+    }
+
+    85% {
+        right: 0%;
+        opacity: 1;
+    }
+
+    100% {
+        right: -35%;
+        opacity: 1;
+    }
+}
